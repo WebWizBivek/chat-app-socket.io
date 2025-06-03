@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
-import { useContext } from 'react';
-import { SocketContext } from '../providers/socketProvider.jsx';
+import React, { useState } from "react";
+import { useContext } from "react";
+import { SocketContext } from "../providers/socketProvider.jsx";
 function NameRoomForm() {
-  const [name, setName] = useState('');
-  const [room, setRoom] = useState('');
-    const socket= useContext(SocketContext);
+  const [name, setName] = useState("");
+  const [room, setRoom] = useState("");
+  const [data, setData] = useState(null);
+
+  const socket = useContext(SocketContext);
   const handleClick = () => {
-    socket.emit("hello","i love india")
+    setData({ name, room });
+    socket.emit("hello", {
+      name,
+      room,
+    });
   };
 
   return (
@@ -25,6 +31,7 @@ function NameRoomForm() {
         placeholder="Enter room name"
         className="px-4 py-2 w-64 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
       />
+
       <button
         onClick={handleClick}
         className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"

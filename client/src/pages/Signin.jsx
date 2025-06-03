@@ -1,37 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-function SignIn() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+export default function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!email || !password) {
-      setError('Please fill in both fields.');
+      setError("Please fill in both fields.");
       return;
     }
 
     try {
-      console.log('Signing in with:', { email, password });
-      setError('');
+      console.log("Signing in with:", { email, password });
+      setError("");
       // Add your sign-in logic here (API call, Firebase auth, etc.)
     } catch (err) {
-      setError('Authentication failed. Please try again.');
+      setError("Authentication failed. Please try again.");
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-purple-200">
       <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Welcome Back 👋</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+          Welcome Back 👋
+        </h2>
 
-        {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
+        {error && (
+          <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
             <input
               id="email"
               type="email"
@@ -44,7 +53,12 @@ function SignIn() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
             <input
               id="password"
               type="password"
@@ -65,8 +79,11 @@ function SignIn() {
         </form>
 
         <p className="mt-6 text-sm text-center text-gray-600">
-          Don’t have an account?{' '}
-          <a href="#" className="text-indigo-600 hover:text-indigo-800 font-medium transition duration-200">
+          Don’t have an account?{" "}
+          <a
+            href="#"
+            className="text-indigo-600 hover:text-indigo-800 font-medium transition duration-200"
+          >
             Sign up
           </a>
         </p>
@@ -74,5 +91,3 @@ function SignIn() {
     </div>
   );
 }
-
-export default SignIn;

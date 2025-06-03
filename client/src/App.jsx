@@ -1,16 +1,6 @@
-import { useState } from 'react'
-import SignIn from './pages/Signin'
-import ChatApp from './pages/ChatApp'
-
+import { useState } from "react";
 function App() {
-
-  return (
-   <div>
-{/* <SignIn /> */}
-<ChatApp />
-
-   </div>
-  )
+  return <div></div>;
 }
 
-export default App
+export default App;
