@@ -1,32 +1,38 @@
 import React, { useState } from 'react';
-
-function ChatInput() {
-  const [message, setMessage] = useState('');
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!message.trim()) return;
-
-    console.log('Message sent:', message);
-    setMessage('');
+import { useContext } from 'react';
+import { SocketContext } from '../providers/socketProvider.jsx';
+function NameRoomForm() {
+  const [name, setName] = useState('');
+  const [room, setRoom] = useState('');
+    const socket= useContext(SocketContext);
+  const handleClick = () => {
+    socket.emit("hello","i love india")
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex p-4 bg-white border-t">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 space-y-4">
       <input
         type="text"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="Type your message..."
-        className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Enter your name"
+        className="px-4 py-2 w-64 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+      <input
+        type="text"
+        value={room}
+        onChange={(e) => setRoom(e.target.value)}
+        placeholder="Enter room name"
+        className="px-4 py-2 w-64 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
       />
       <button
-        type="submit"
-        className="ml-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
+        onClick={handleClick}
+        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
       >
-        Send
+        Submit
       </button>
-    </form>
+    </div>
   );
 }
 
-export default ChatInput;
+export default NameRoomForm;
