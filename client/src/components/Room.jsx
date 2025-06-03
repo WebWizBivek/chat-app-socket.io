@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { SocketContext } from "../providers/socketProvider";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 
 function Room() {
   const socket = useContext(SocketContext);

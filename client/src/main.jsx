@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import SignIn from "./pages/Signin.jsx";
 import SignUp from "./pages/Signup.jsx";
 import JoinRoom from "./pages/JoinRoom.jsx";
+import Room from "./components/rOOM.JSX";
 
 let router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ let router = createBrowserRouter([
   {
     path: "/join",
     Component: JoinRoom,
+  },
+  {
+    path: "/room",
+    Component: Room,
   },
 ]);
 

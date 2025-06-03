@@ -20,7 +20,7 @@ function JoinRoom() {
     socket.emit("join_room", { name, room });
 
     // Store info locally or in context if needed
-    navigate(`/chat?name=${name}&room=${room}`);
+    navigate(`/room`);
   };
 
   return (
