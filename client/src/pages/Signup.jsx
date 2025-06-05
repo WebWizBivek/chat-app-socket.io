@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MessageCircle, User, Mail, Lock, Eye, EyeOff } from "lucide-react";
-
+import axios from "axios";
 const Signup = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -26,25 +26,27 @@ const Signup = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
+      const response = await axios.post(
+        "http://localhost:3000/api/user/signup",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      if (response.ok) {
-        setMessage(data.message);
-        setStatus("success");
-        setFormData({ username: "", email: "", password: "" });
-      } else {
-        setMessage(data.message || "Something went wrong.");
-        setStatus("error");
-      }
+      const data = response.data;
+
+      setMessage(data.message);
+      setStatus("success");
+      setFormData({ username: "", email: "", password: "" });
     } catch (error) {
-      setMessage("Server error. Please try again.");
+      if (error.response && error.response.data) {
+        setMessage(error.response.data.message || "Something went wrong.");
+      } else {
+        setMessage("Server error. Please try again.");
+      }
       setStatus("error");
     } finally {
       setIsLoading(false);

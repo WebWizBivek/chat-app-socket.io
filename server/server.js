@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const { createServer } = require("node:http");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -33,7 +34,7 @@ io.on("connection", (socket) => {
     socket.to(data.room).emit("receive_message", data);
   });
 });
-
+app.use(cors());
 app.use(express.json());
 
 // Define routes

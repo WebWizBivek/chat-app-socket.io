@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MessageCircle, Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
-
+import axios from "axios";
 const Signin = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -26,39 +26,41 @@ const Signin = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-
-      if (response.ok) {
-        setMessage(data.message);
-        setStatus("success");
-
-        // Store token based on remember me preference
-        if (rememberMe) {
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("user", JSON.stringify(data.user));
-        } else {
-          sessionStorage.setItem("token", data.token);
-          sessionStorage.setItem("user", JSON.stringify(data.user));
+      const response = await axios.post(
+        "http://localhost:3000/api/user/signin",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
+      );
 
-        // Redirect or handle successful login
-        setTimeout(() => {
-          // Replace with your routing logic
-          console.log("Redirecting to dashboard...");
-        }, 1500);
+      const data = response.data;
+
+      setMessage(data.message);
+      setStatus("success");
+
+      // Store token based on remember me preference
+      if (rememberMe) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
       } else {
-        setMessage(data.message || "Something went wrong.");
-        setStatus("error");
+        sessionStorage.setItem("token", data.token);
+        sessionStorage.setItem("user", JSON.stringify(data.user));
       }
+
+      // Redirect or handle successful login
+      setTimeout(() => {
+        // Replace with your routing logic
+        console.log("Redirecting to dashboard...");
+      }, 1500);
     } catch (error) {
-      setMessage("Server error. Please try again.");
+      if (error.response && error.response.data) {
+        setMessage(error.response.data.message || "Something went wrong.");
+      } else {
+        setMessage("Server error. Please try again.");
+      }
       setStatus("error");
     } finally {
       setIsLoading(false);
