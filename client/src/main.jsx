@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import SocketProvider from "./providers/socketProvider.jsx";
+import UserProvider from "./providers/userProvider.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import SignIn from "./pages/Signin.jsx";
 import SignUp from "./pages/Signup.jsx";
@@ -31,6 +32,8 @@ let router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <SocketProvider>
-    <RouterProvider router={router}></RouterProvider>
+    <UserProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </UserProvider>
   </SocketProvider>
 );

@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { MessageCircle, Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
 import axios from "axios";
 import { UserContext } from "../providers/userProvider.jsx";
 import { useNavigate } from "react-router";
 const Signin = () => {
+  const { setUser } = useContext(UserContext);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -39,7 +41,8 @@ const Signin = () => {
       );
 
       const data = response.data;
-
+      setUser(data.user);
+      console.log(data);
       setMessage(data.message);
       setStatus("success");
 
@@ -52,6 +55,8 @@ const Signin = () => {
         sessionStorage.setItem("user", JSON.stringify(data.user));
       }
       if (data.token) {
+        // Set user context
+        setUser(data.user);
         navigate("/dashboard");
       }
 

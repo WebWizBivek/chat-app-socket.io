@@ -2,20 +2,16 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { createContext } from "react";
 
-export const UserContext = createContext(null);
+export const UserContext = createContext("hi");
 
-const userProvider = () => {
-  const [user, setUser] = useState(null);
-
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {}, []);
+const UserProvider = ({ children }) => {
+  const [user, setUser] = useState("hi");
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      {/* Children components will go here */}
+      {children}
     </UserContext.Provider>
   );
 };
 
-export default userProvider;
+export default UserProvider;
