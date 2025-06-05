@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const { createServer } = require("node:http");
+const socketHandler = require("./socket.js"); // Assuming you have a socket handler file
 const dotenv = require("dotenv");
 dotenv.config();
 const connectDB = require("./db");
@@ -17,23 +18,7 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
-
-io.on("connection", (socket) => {
-  // console.log(socket)
-  console.log("a user connected");
-  console.log(socket.id);
-  socket.on("hello", (data) => {
-    console.log(data);
-  });
-  socket.on("join_room", ({ name, room }) => {
-    socket.join(room);
-    console.log(`${name} joined ${room}`);
-  });
-
-  socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
-  });
-});
+socketHandler(io); // Initialize socket.io with the handler
 app.use(cors());
 app.use(express.json());
 

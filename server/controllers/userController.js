@@ -40,7 +40,6 @@ const signup = async (req, res) => {
     return res.status(500).json({ message: "Internal server error." });
   }
 };
-
 const signin = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -82,4 +81,26 @@ const signin = async (req, res) => {
     res.status(500).json({ message: "Internal server error." });
   }
 };
-module.exports = { signup, signin };
+const getOtherUsers = async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+      return res.status(401).json({ message: "Authorization token missing" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const currentUserId = decoded.userId;
+
+    const users = await User.find({ _id: { $ne: currentUserId } }).select(
+      "-password" // exclude password from response
+    );
+
+    res.status(200).json({ success: true, users });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ message: "Failed to fetch users" });
+  }
+};
+
+module.exports = { signup, signin, getOtherUsers };
