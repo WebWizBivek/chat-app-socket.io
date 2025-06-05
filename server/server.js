@@ -1,6 +1,9 @@
 const express = require("express");
 const { createServer } = require("node:http");
-
+const dotenv = require("dotenv");
+dotenv.config();
+const connectDB = require("./db");
+connectDB(); // Connect to MongoDB
 const app = express();
 const server = createServer(app);
 const { Server } = require("socket.io");
