@@ -8,6 +8,8 @@ import SignIn from "./pages/Signin.jsx";
 import SignUp from "./pages/Signup.jsx";
 import JoinRoom from "./pages/JoinRoom.jsx";
 import Room from "./components/rOOM.JSX";
+import Chat from "./layouts/Chat.jsx";
+import Profile from "./pages/Profile.jsx";
 
 let router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ let router = createBrowserRouter([
   {
     path: "/room",
     Component: Room,
+  },
+  {
+    path: "/dashboard",
+    Component: Chat,
+  },
+  {
+    path: "/profile",
+    Component: Profile,
   },
 ]);
 

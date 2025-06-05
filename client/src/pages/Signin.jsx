@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MessageCircle, Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 const Signin = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -18,7 +19,7 @@ const Signin = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -48,6 +49,9 @@ const Signin = () => {
       } else {
         sessionStorage.setItem("token", data.token);
         sessionStorage.setItem("user", JSON.stringify(data.user));
+      }
+      if (data.token) {
+        navigate("/dashboard");
       }
 
       // Redirect or handle successful login
