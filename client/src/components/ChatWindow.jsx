@@ -11,7 +11,6 @@ import {
   Check,
   CheckCheck,
 } from "lucide-react";
-
 // Mock messages data
 const mockMessages = [
   {

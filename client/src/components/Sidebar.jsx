@@ -7,6 +7,7 @@ import {
   Settings,
   Bell,
 } from "lucide-react";
+import { Link } from "react-router";
 
 const chats = [
   {
@@ -82,7 +83,7 @@ export default function Sidebar() {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-              <MessageCircle className="w-5 h-5 text-white" />
+              <MessageCircle className="w-5 h-5 text-red-600" />{" "}
             </div>
             <h2 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               ChatyApp
@@ -90,7 +91,10 @@ export default function Sidebar() {
           </div>
           <div className="flex items-center space-x-2">
             <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
-              <Users className="w-5 h-5" />
+              <Link to={"/profile"}>
+                {" "}
+                <Users className="w-5 h-5" />{" "}
+              </Link>
             </button>
             <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
               <Settings className="w-5 h-5" />
