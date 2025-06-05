@@ -5,6 +5,9 @@ dotenv.config();
 const connectDB = require("./db");
 connectDB(); // Connect to MongoDB
 const app = express();
+//route imports
+const userRoutes = require("./routes/userRoutes");
+
 const server = createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
@@ -30,6 +33,11 @@ io.on("connection", (socket) => {
     socket.to(data.room).emit("receive_message", data);
   });
 });
+
+app.use(express.json());
+
+// Define routes
+app.use("/api/user", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello world</h1>");
