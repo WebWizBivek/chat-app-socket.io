@@ -8,7 +8,8 @@ import {
   Bell,
 } from "lucide-react";
 import { Link } from "react-router";
-
+import { useContext } from "react";
+import { OtherUserContext } from "../providers/otherUserProvider.jsx";
 const chats = [
   {
     id: 1,
@@ -71,7 +72,8 @@ const getAvatarColor = (name) => {
 export default function Sidebar() {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeChat, setActiveChat] = useState(1);
-
+  const { otherUser } = useContext(OtherUserContext);
+  console.log("Other User:", otherUser);
   const filteredChats = chats.filter((chat) =>
     chat.name.toLowerCase().includes(searchTerm.toLowerCase())
   );

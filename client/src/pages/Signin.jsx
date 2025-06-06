@@ -5,7 +5,6 @@ import { UserContext } from "../providers/userProvider.jsx";
 import { useNavigate } from "react-router";
 const Signin = () => {
   const { setUser } = useContext(UserContext);
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",

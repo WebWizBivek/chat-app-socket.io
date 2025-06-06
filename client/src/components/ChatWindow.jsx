@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import {
   Phone,
   Video,
@@ -11,6 +11,7 @@ import {
   Check,
   CheckCheck,
 } from "lucide-react";
+import { OtherUserContext } from "../providers/otherUserProvider";
 // Mock messages data
 const mockMessages = [
   {

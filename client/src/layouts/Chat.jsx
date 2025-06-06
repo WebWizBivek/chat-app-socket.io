@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import Sidebar from "../components/Sidebar.jsx";
 import ChatWindow from "../components/ChatWindow.jsx";
 import { useContext } from "react";
