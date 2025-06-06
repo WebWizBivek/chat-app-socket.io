@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FiSend } from "react-icons/fi"; // Send icon from react-icons
+import { OtherUserContext } from "../providers/otherUserProvider";
 
 export default function MessageInput({ onSend }) {
   const [message, setMessage] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const trimmedMessage = message.trim();

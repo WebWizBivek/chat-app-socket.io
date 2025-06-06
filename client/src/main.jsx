@@ -9,6 +9,7 @@ import SignUp from "./pages/Signup.jsx";
 import Chat from "./layouts/Chat.jsx";
 import Profile from "./pages/Profile.jsx";
 import File from "./File.jsx";
+import { OtherUserProvider } from "./providers/otherUserProvider.jsx";
 
 let router = createBrowserRouter([
   {
@@ -36,8 +37,10 @@ let router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <SocketProvider>
-    <UserProvider>
-      <RouterProvider router={router}></RouterProvider>
-    </UserProvider>
+    <OtherUserProvider>
+      <UserProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </UserProvider>
+    </OtherUserProvider>
   </SocketProvider>
 );

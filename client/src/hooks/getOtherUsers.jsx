@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-
+import { useContext } from "react";
+import { OtherUserContext } from "../providers/otherUserProvider.jsx";
 const useOtherUsers = () => {
   const navigate = useNavigate();
-
+  const { setOtherUser, otherUser } = useContext(OtherUserContext);
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -23,7 +24,8 @@ const useOtherUsers = () => {
           }
         );
         const otherUsers = response.data;
-        console.log("Other users fetched:", otherUsers);
+        setOtherUser(otherUsers.users);
+        console.log("Other users fetched:", otherUser);
       } catch (error) {
         console.error("Error fetching other users:", error);
         if (error.response && error.response.status === 401) {
@@ -31,6 +33,7 @@ const useOtherUsers = () => {
         }
       }
     };
+
     fetchOtherUsers();
   }, []);
 };
