@@ -5,7 +5,9 @@ import { useContext } from "react";
 import { SocketContext } from "../providers/socketProvider.jsx";
 import { UserContext } from "../providers/userProvider.jsx";
 import { useEffect } from "react";
+import useOtherUsers from "../hooks/getOtherUsers.jsx";
 const Chat = () => {
+  useOtherUsers();
   const socket = useContext(SocketContext);
   const user = useContext(UserContext);
   useEffect(() => {

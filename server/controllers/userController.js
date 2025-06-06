@@ -83,7 +83,7 @@ const signin = async (req, res) => {
 };
 const getOtherUsers = async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.headers.authorization;
 
     if (!token) {
       return res.status(401).json({ message: "Authorization token missing" });
@@ -96,10 +96,10 @@ const getOtherUsers = async (req, res) => {
       "-password" // exclude password from response
     );
 
-    res.status(200).json({ success: true, users });
+    return res.status(200).json({ success: true, users });
   } catch (error) {
-    console.error("Error fetching users:", error);
-    res.status(500).json({ message: "Failed to fetch users" });
+    console.error("Error fetching usesrs:", error);
+    return res.status(500).json({ message: "Failed to fetch users" });
   }
 };
 

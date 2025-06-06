@@ -9,7 +9,7 @@ connectDB(); // Connect to MongoDB
 const app = express();
 //route imports
 const userRoutes = require("./routes/userRoutes");
-
+const upload = require("./multer/multer"); // Import multer configuration
 const server = createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
@@ -25,8 +25,9 @@ app.use(express.json());
 // Define routes
 app.use("/api/user", userRoutes);
 
-app.get("/", (req, res) => {
-  res.send("<h1>Hello world</h1>");
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  // Handle file upload here
+  res.send(req.file.buffer);
 });
 
 server.listen(3000, () => {

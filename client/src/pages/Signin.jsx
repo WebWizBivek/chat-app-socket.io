@@ -45,6 +45,7 @@ const Signin = () => {
       console.log(data);
       setMessage(data.message);
       setStatus("success");
+      localStorage.setItem("token", data.token);
 
       // Store token based on remember me preference
       if (rememberMe) {
